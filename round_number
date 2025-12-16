@@ -1,0 +1,54 @@
+import java.util.*;
+public class MakeItound {
+    
+    static int countpower(long n, long b){
+            long temp=b;
+            int p=1;
+            int cnt=0;
+            while(temp<=n){
+              if(n%temp==0)cnt=p;
+              temp*=b;
+              p++;
+            }
+            return cnt;
+    }
+    
+    
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int t= sc.nextInt();
+        while(t-->0){
+            long n=sc.nextInt();
+            long m=sc.nextInt();
+            
+            int cnt2=countpower(n,2);
+            int cnt5=countpower(n,5);
+            
+            long k=1;
+            
+            while(cnt2<cnt5 && k*2<=m){
+              k*=2;
+              cnt2++;
+            }
+            
+            while(cnt2>cnt5 && k*5 <=m){
+              k*=5;
+              cnt5++;
+            }
+            
+           while(k*10<=m){
+             k*=10;
+           }
+            
+            long ans=n*k;
+            ans*=m/k;
+            
+            
+            
+
+            System.out.println(ans);
+
+        }
+    }
+    
+}
