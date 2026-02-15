@@ -1,0 +1,33 @@
+import java.util.*;
+public class Heapify {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int t= sc.nextInt();
+        while(t-->0){
+            int n= sc.nextInt();
+            int [] arr= new int[n+1];
+            for(int i=1;i<=n;i++) arr[i]= sc.nextInt();
+            for(int i=1;i<=n;i++){
+                ArrayList<Integer> li= new ArrayList<>();
+                for(int j=i;j<=n;j*=2){
+                    li.add(arr[j]);
+                }
+                Collections.sort(li);
+                int k=0;
+                for(int j=i;j<=n;j*=2){
+                    arr[j]=li.get(k);
+                    k++;
+                }
+
+            }
+            boolean flag=true;
+            for(int i=2;i<=n;i++){
+                if(arr[i]<arr[i-1]){
+                    flag=false;
+                }
+            }
+            System.out.println(flag? "YES": "NO");
+        }
+    }
+    
+}
