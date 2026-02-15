@@ -1,0 +1,40 @@
+import java.util.*;
+public class DiceRollSequence {
+    static int rec(int idx, int prev, int [] arr,int [][] dp, int n){
+        if(idx==n) return 0;
+
+        if(dp[idx][prev]!=0) return dp[idx][prev];
+        
+        // pick
+        int np=Integer.MAX_VALUE;
+        if(prev==-1|| (arr[idx] !=7-prev && arr[idx]!=prev)) np=rec(idx+1,arr[idx],arr,dp, n);
+        
+        int p=Integer.MAX_VALUE;
+        for(int i=1;i<=6;i++){
+            if(prev==-1 || (7-prev !=i && prev!=i)){
+            int temp=1+rec(idx+1,i,arr,dp,n);
+            p=Math.min(p,temp);
+           }
+        }
+        // not pick
+        return dp[idx][prev]= Math.min(p,np);
+    }
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int t= sc.nextInt();
+        while(t-->0){
+            int n=sc.nextInt();
+            int [] arr=new int [n];
+            for(int i=0;i<n;i++){
+                arr[i]=sc.nextInt();
+            }
+            int [][] dp=new int[n][7];
+            for(int i=0;i<n;i++){
+                for(int j=0;j<7;j++) dp[i][j]=-1;
+            }
+            int ans= rec(0,-1,arr,dp,n);
+            System.out.println(ans);
+        }
+    }
+    
+}
