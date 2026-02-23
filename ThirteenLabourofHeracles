@@ -1,0 +1,51 @@
+import java.util.*;
+public class ThirteenLabourofHeracles {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int t= sc.nextInt();
+        while(t-->0){
+            int n= sc.nextInt();
+            ArrayList<ArrayList<Integer>> adj= new ArrayList<>();
+            for(int i=0;i<=n;i++)adj.add(new ArrayList<>());
+
+            long sum=0;
+            int [][] arr= new int[n+1][2];
+
+            for(int i=1;i<=n;i++){
+                arr[i][0]=sc.nextInt();
+                sum+=arr[i][0];
+            }
+
+            for(int i=0;i<n-1;i++){
+                int u=sc.nextInt();
+                int v=sc.nextInt();
+                adj.get(u).add(v);
+                adj.get(v).add(u);
+            }
+
+            for(int i=1;i<=n;i++) arr[i][1]=Math.max(adj.get(i).size()-1,0);
+
+            Arrays.sort(arr,(a,b)->(b[0]-a[0]));
+            long temp=0;
+            int cnt=1;
+            int j=0;
+           
+            while(cnt<=n-1 && j<=n){
+                if(arr[j][1]==0){
+                  j++;
+                  continue;
+                }
+
+                System.out.print(sum+temp+" ");
+                temp+=arr[j][0];
+                arr[j][1]--;
+                cnt++;
+                
+            }
+            System.out.print(sum+temp+" ");
+            System.out.println();
+        }
+        
+    }
+    
+}
