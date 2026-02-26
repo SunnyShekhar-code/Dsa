@@ -1,0 +1,51 @@
+import java.util.*;
+public class BalancedBitstring {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int t= sc.nextInt();
+        while(t-->0){
+            int n= sc.nextInt();
+            int k= sc.nextInt();
+           String s= sc.next();
+
+           int one=0,zero=0,empty=0;
+           
+            boolean flag=false;
+
+            for(int i=0;i<k;i++){
+                int j=i;
+                char prev='p';
+                while(j<n){
+                    char ch= s.charAt(j);
+                    if(ch=='0'){
+                        if(prev=='p'|| prev=='0') prev='0';
+                        else{
+                            flag=false;
+                            break;
+                        }
+                    }else if(ch=='1'){
+                        if(prev=='p'|| prev=='1') prev='1';
+                        else{
+                            flag=false;
+                            break;
+                        }
+                    }
+                    j+=k;
+                }
+
+                if(!flag) break;
+                if(prev=='p') empty++;
+                else if(prev=='0') zero++;
+                else one++;
+            }
+
+            boolean test=true;
+            int rem= (empty-Math.abs(one-zero)) % 2;
+            test= rem==0;
+            System.out.println((flag & test) ? "YES":"NO");
+
+        }
+        
+    }
+    
+}
